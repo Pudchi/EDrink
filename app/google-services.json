@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "882258906536",
+    "firebase_url": "https://e-drink.firebaseio.com",
+    "project_id": "e-drink",
+    "storage_bucket": "e-drink.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882258906536:android:fb7f57fb80ab1a9e",
+        "android_client_info": {
+          "package_name": "com.dashwood.edrink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882258906536-7e6abv1knl7u7qi5uaf036vh9vp3to81.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dashwood.edrink",
+            "certificate_hash": "34de6e3145a31183fcfea94787e385146210ff59"
+          }
+        },
+        {
+          "client_id": "882258906536-6hq195tjgjpk7ij8pvafn8mfgt62rnm6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu0dYVVHt2ij-uhxE0UgsC7KaSMgTYVhk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882258906536-6hq195tjgjpk7ij8pvafn8mfgt62rnm6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

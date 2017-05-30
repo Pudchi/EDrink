@@ -5,10 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 public class ProfileActivity extends AppCompatActivity {
 
     TextView name_lbl, gender_lbl, hw_lbl, goal_lbl, name_txt, gender_txt, hw_txt, goal_txt;
     Typeface typeface_regular;
+    LottieAnimationView profile_pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +19,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         typeface_regular = TypefaceProvider.getTypeFace(getApplicationContext(), "Circular_book.ttf");
+
+        profile_pic = (LottieAnimationView) findViewById(R.id.animation_view);
 
         name_lbl = (TextView) findViewById(R.id.name_lbl);
         name_lbl.setTypeface(typeface_regular);
