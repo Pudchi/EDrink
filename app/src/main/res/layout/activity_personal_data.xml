@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context="com.dashwood.edrink.PersonalDataActivity">
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="68dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:layout_marginStart="68dp"
+        android:textColor="#ffffff"/>
+
+    <EditText
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="68dp"
+        android:layout_marginStart="68dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        android:textColor="#ffffff"/>
+
+    <EditText
+        android:id="@+id/height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="68dp"
+        android:layout_marginStart="68dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        android:textColor="#ffffff"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="51dp"
+        android:layout_height="16dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="121dp"
+        android:text="Name :"
+        android:textColor="#FCFDFA"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="58dp"
+        android:layout_height="17dp"
+        android:layout_marginLeft="68dp"
+        android:text="Height :"
+        android:textColor="#FCFDFA"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="43dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:layout_marginStart="68dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="63dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="43dp"
+        android:text="Weight :"
+        android:textColor="#FCFDFA"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="148dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="49dp"
+        android:text="E-Drink"
+        android:textColor="#FCFDFA"
+        android:textSize="40sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="56dp"
+        android:layout_height="16dp"
+        android:text="gender :"
+        android:textColor="#FCFDFA"
+        android:layout_marginTop="43dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        android:layout_marginLeft="68dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <RadioGroup
+        android:layout_width="197dp"
+        android:layout_height="31dp"
+        android:layout_marginLeft="82dp"
+        android:layout_marginTop="318dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_width="91dp"
+            android:layout_height="wrap_content"
+            android:text="male"
+            android:textColorLink="#FCFDFA" />
+
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="female" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/comfirm"
+        android:text="confirm"
+        android:textColor="#FCFDFA"
+        android:textSize="20sp"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:shadowColor="#D8D8D8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_marginLeft="120dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="53dp"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline"
+        app:layout_constraintGuide_begin="-23dp"
+        android:orientation="horizontal" />
+
+</android.support.constraint.ConstraintLayout>

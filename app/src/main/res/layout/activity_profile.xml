@@ -87,7 +87,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="51dp"
         android:layout_marginTop="22dp"
-        android:text="HOW"
         android:textColor="#ffffff"
         android:textSize="18sp"
         app:layout_constraintLeft_toRightOf="@+id/name_lbl"
@@ -99,19 +98,17 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="51dp"
         android:layout_marginTop="20dp"
-        android:text="MALE"
         android:textColor="#ffffff"
         android:textSize="18sp"
         app:layout_constraintLeft_toRightOf="@+id/gender_lbl"
         app:layout_constraintTop_toBottomOf="@+id/name_txt" />
 
     <TextView
-        android:id="@+id/hw_txt"
+        android:id="@+id/height_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="51dp"
         android:layout_marginTop="20dp"
-        android:text="176 / 60"
         android:textColor="#ffffff"
         android:textSize="16sp"
         app:layout_constraintLeft_toRightOf="@+id/hw_lbl"
@@ -123,11 +120,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="51dp"
         android:layout_marginTop="20dp"
-        android:text="2.36 L"
         android:textColor="#ffffff"
         android:textSize="16sp"
         app:layout_constraintLeft_toRightOf="@+id/goal_lbl"
-        app:layout_constraintTop_toBottomOf="@+id/hw_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/height_txt" />
 
     <Button
         android:id="@+id/edit_btn"
@@ -142,5 +138,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/animation_view"
         app:layout_constraintHorizontal_bias="0.497" />
+
+    <TextView
+        android:id="@+id/weight_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/height_txt"
+        android:layout_marginLeft="8dp"
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="357dp" />
 
 </android.support.constraint.ConstraintLayout>
