@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         goto_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                startActivity(new Intent(MainActivity.this, PersonalDataActivity.class));
             }
         });
 
