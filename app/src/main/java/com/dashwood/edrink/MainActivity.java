@@ -2,9 +2,9 @@ package com.dashwood.edrink;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -40,8 +40,7 @@ public class MainActivity extends AppCompatActivity {
         goto_login.setTypeface(typeface_regular);
 
         auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() == null)
-        {
+        if (auth.getCurrentUser() == null) {
             goto_login.setVisibility(View.VISIBLE);
             goto_login.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -51,9 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             //Toast.makeText(getApplicationContext(), "Account LOG OUT", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
+        } else {
             goto_login.setText("LOG OUT");
             goto_login.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -69,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser == null)
-                {
+                if (firebaseUser == null) {
                     Toast.makeText(getApplicationContext(), "未登入", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -82,12 +78,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, PersonalDataActivity.class));
             }
         });
-
-
-
-
-
-
     }
 
     @Override

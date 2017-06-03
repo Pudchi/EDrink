@@ -32,8 +32,8 @@ public class ProfileActivity extends AppCompatActivity {
         String genderText="";
         if(gender.equals("Male")){
             genderText="Male";
-        }else{
-            genderText="Female";
+        }else {
+            genderText = "Female";
         }
         main_pro_name.setText(bundle_get.getString("main_pro_name_data"));
         main_pro_gender.setText(genderText);

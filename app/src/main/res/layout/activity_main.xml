@@ -18,7 +18,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_fileName="green_loader.json"
-        app:lottie_loop="true" />
+        app:lottie_loop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <TextView
         android:id="@+id/water_percent"
@@ -34,7 +36,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/water_loading"
-        app:layout_constraintHorizontal_bias="0.523" />
+        app:layout_constraintHorizontal_bias="0.523"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp" />
 
     <Button
         android:id="@+id/profile_btn"
@@ -50,7 +54,27 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.498" />
+        app:layout_constraintHorizontal_bias="0.498"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+
+    <Button
+        android:id="@+id/mBluetoothAdapter"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="127dp"
+        android:background="@drawable/button_default"
+        android:text="connect"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/water_loading"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="127dp" />
 
     <Button
         android:id="@+id/login_btn"
@@ -65,5 +89,36 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_btn" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp">
+
+        <Button
+            android:id="@+id/btn_showConnectedDevices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="顯示已經連線過的藍芽" />
+
+        <Button
+            android:id="@+id/btn_searchDevices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="搜尋附近的藍芽裝置" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView_showDevice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_below="@+id/linearLayout1"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+    </ListView>
 
 </android.support.constraint.ConstraintLayout>
