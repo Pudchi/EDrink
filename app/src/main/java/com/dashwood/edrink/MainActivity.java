@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     LottieAnimationView water_anim;
-    Button goto_profile, goto_login;
+    Button goto_profile, goto_login, connect;
     Typeface typeface_regular;
     TextView water_percent;
     private FirebaseAuth.AuthStateListener authListener;
@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         goto_profile.setTypeface(typeface_regular);
         goto_login = (Button) findViewById(R.id.login_btn);
         goto_login.setTypeface(typeface_regular);
+        connect = (Button) findViewById(R.id.btn_connect);
+        connect.setTypeface(typeface_regular);
 
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() == null) {
@@ -76,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, PersonalDataActivity.class));
+            }
+        });
+
+        connect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BluetoothDeviceActivity.class));
             }
         });
     }

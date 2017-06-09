@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dashwood.edrink">
 
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
@@ -22,6 +22,7 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".PersonalDataActivity" />
+        <activity android:name=".BluetoothDeviceActivity"></activity>
     </application>
 
 </manifest>
