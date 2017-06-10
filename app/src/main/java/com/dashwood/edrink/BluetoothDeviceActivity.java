@@ -1,6 +1,7 @@
 package com.dashwood.edrink;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.content.Context;
@@ -13,8 +14,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.airbnb.lottie.LottieAnimationView;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 public class BluetoothDeviceActivity extends AppCompatActivity {
 
@@ -25,6 +31,7 @@ public class BluetoothDeviceActivity extends AppCompatActivity {
     BluetoothLeScanner btScanner;
     private final static int REQUEST_ENABLE_BT = 1;
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
+    ListView bt_device_list;
 
 
     @Override
@@ -62,6 +69,7 @@ public class BluetoothDeviceActivity extends AppCompatActivity {
         btScanner = btAdapter.getBluetoothLeScanner();
 
         search = (LottieAnimationView) findViewById(R.id.search_anim);
+        bt_device_list = (ListView) findViewById(R.id.bt_device_list);
 
 
 
@@ -97,6 +105,8 @@ public class BluetoothDeviceActivity extends AppCompatActivity {
                         Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                         startActivityForResult(enableIntent,REQUEST_ENABLE_BT);
                     }
+
+                    list_paired_Devices();
                 }
                 else
                 {
@@ -110,5 +120,15 @@ public class BluetoothDeviceActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void list_paired_Devices() {
+        Set<BluetoothDevice> pairedDevices = btAdapter.getBondedDevices();
+        ArrayList<String> devices = new ArrayList<>();
+        for (BluetoothDevice bt : pairedDevices) {
+            devices.add(bt.getName() + "\n" + bt.getAddress());
+        }
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, devices);
+        bt_device_list.setAdapter(arrayAdapter);
     }
 }

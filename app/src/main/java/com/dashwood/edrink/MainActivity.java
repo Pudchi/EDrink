@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
                 }
             });
             //Toast.makeText(getApplicationContext(), "Account LOG OUT", Toast.LENGTH_SHORT).show();
