@@ -1,7 +1,12 @@
 package com.dashwood.edrink;
 
+import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -14,15 +19,24 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.IOException;
+import java.util.UUID;
+
 public class MainActivity extends AppCompatActivity {
 
     LottieAnimationView water_anim;
-    Button goto_profile, goto_login, connect;
+    Button goto_profile, goto_login, connect, disconnect;
     Typeface typeface_regular;
     TextView water_percent;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
     //private FirebaseUser user;
+    static boolean isConnected = false;
+    ProgressDialog progress;
+    String address = null;
+    BluetoothSocket btSocket = null;
+    BluetoothAdapter bluetoothAdapter = null;
+    static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +54,30 @@ public class MainActivity extends AppCompatActivity {
         goto_login.setTypeface(typeface_regular);
         connect = (Button) findViewById(R.id.btn_connect);
         connect.setTypeface(typeface_regular);
+        disconnect = (Button) findViewById(R.id.btn_disconnect);
+        disconnect.setTypeface(typeface_regular);
+
+
+        Intent get_device = getIntent();
+        address = get_device.getStringExtra(BluetoothDeviceActivity.EXTRA_ADDRESS);
+
+        if (address == null)
+        {
+            isConnected = false;
+            Toast.makeText(getApplicationContext(), "HC-05 NOT Connected", Toast.LENGTH_SHORT).show();
+
+        }
+        else
+        {
+            isConnected = true;
+            new ConnectBT().execute();
+            connect.setVisibility(View.INVISIBLE);
+            disconnect.setVisibility(View.VISIBLE);
+        }
+
+
+
+
 
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() == null) {
@@ -80,12 +118,92 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(new Intent(MainActivity.this, BluetoothDeviceActivity.class));
+                finish();
+
             }
         });
+
+        disconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Disconnect();
+                disconnect.setVisibility(View.INVISIBLE);
+                connect.setVisibility(View.VISIBLE);
+                Toast.makeText(getApplicationContext(), "HC-05 DISCONNECTED", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
+    }
+
+    private void sendSignal ( String number ) {
+        if ( btSocket != null ) {
+            try {
+                btSocket.getOutputStream().write(number.toString().getBytes());
+            } catch (IOException e) {
+
+            }
+        }
+    }
+
+    private void Disconnect () {
+        if ( btSocket!=null ) {
+            try {
+                btSocket.close();
+            } catch(IOException e) {
+
+            }
+        }
+    }
+
+    private class ConnectBT extends AsyncTask<Void, Void, Void> {
+        private boolean ConnectSuccess = true;
+
+        @Override
+        protected  void onPreExecute () {
+            progress = ProgressDialog.show(MainActivity.this, "Connecting...", "Please Wait!!!");
+        }
+
+        @Override
+        protected Void doInBackground (Void... devices) {
+            try {
+                if ( btSocket==null || isConnected == true ) {
+                    bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                    BluetoothDevice dispositivo = bluetoothAdapter.getRemoteDevice(address);
+                    btSocket = dispositivo.createInsecureRfcommSocketToServiceRecord(myUUID);
+                    BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
+                    btSocket.connect();
+                }
+            } catch (IOException e) {
+                ConnectSuccess = false;
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute (Void result) {
+            super.onPostExecute(result);
+
+            if (!ConnectSuccess) {
+                Toast.makeText(getApplicationContext(), "Connection Failed. Is it a SPP Bluetooth? Try again.", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_SHORT).show();
+                isConnected = true;
+            }
+
+            progress.dismiss();
+
+        }
     }
 
     @Override

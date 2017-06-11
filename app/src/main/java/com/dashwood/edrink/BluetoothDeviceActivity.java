@@ -10,28 +10,35 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringDef;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Set;
 
 public class BluetoothDeviceActivity extends AppCompatActivity {
 
     LottieAnimationView search;
-    static int anim_status = 0;
+    //static int anim_status = 0;
     BluetoothManager btManager;
     BluetoothAdapter btAdapter;
-    BluetoothLeScanner btScanner;
+    //BluetoothLeScanner btScanner;
     private final static int REQUEST_ENABLE_BT = 1;
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
     ListView bt_device_list;
+    ArrayList<String> s = new ArrayList<String>();
+    public static String EXTRA_ADDRESS = "device_address";
 
 
     @Override
@@ -43,7 +50,7 @@ public class BluetoothDeviceActivity extends AppCompatActivity {
                 } else {
                     final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle("Functionality limited");
-                    builder.setMessage("Since location access has not been granted, this app will not be able to discover beacons when in the background.");
+                    //builder.setMessage("Since location access has not been granted, this app will not be able to discover beacons when in the background.");
                     builder.setPositiveButton(android.R.string.ok, null);
                     builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
 
@@ -59,21 +66,46 @@ public class BluetoothDeviceActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_device);
 
-        btManager = (BluetoothManager)getSystemService(Context.BLUETOOTH_SERVICE);
-        btAdapter = btManager.getAdapter();
-        btScanner = btAdapter.getBluetoothLeScanner();
+
+        btManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        btAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (btAdapter != null && !btAdapter.isEnabled()) {
+            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+        }
+
+        Set<BluetoothDevice> paired = btAdapter.getBondedDevices();
 
         search = (LottieAnimationView) findViewById(R.id.search_anim);
         bt_device_list = (ListView) findViewById(R.id.bt_device_list);
+        for (BluetoothDevice bt : paired)
+            s.add(bt.getName() + " : " + bt.getAddress());
+
+        bt_device_list.setAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.my_list_item, s));
+        bt_device_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String device_info = ((TextView) view).getText().toString();
+                String address = device_info.substring(device_info.length() - 17);
+                Log.i("device", address);
+
+                Intent i = new Intent(BluetoothDeviceActivity.this, MainActivity.class);
+                i.putExtra(EXTRA_ADDRESS, address);
+                startActivity(i);
+            }
+        });
+    }
+}
 
 
 
-        if (Build.VERSION.SDK_INT >= 23) {
+        /*if (Build.VERSION.SDK_INT >= 23) {
             if (this.checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("This app needs location access");
@@ -89,24 +121,22 @@ public class BluetoothDeviceActivity extends AppCompatActivity {
                 });
                 builder.show();
             }
-        }
+        }*/
 
 
 
 
-        search.setOnClickListener(new View.OnClickListener() {
+        /*search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (anim_status == 0)
                 {
                     search.playAnimation();
                     anim_status = 1;
-                    if (btAdapter != null && !btAdapter.isEnabled()) {
-                        Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                        startActivityForResult(enableIntent,REQUEST_ENABLE_BT);
-                    }
 
-                    list_paired_Devices();
+
+
+                    //list_paired_Devices();
                 }
                 else
                 {
@@ -115,20 +145,8 @@ public class BluetoothDeviceActivity extends AppCompatActivity {
                     /*if (btAdapter!= null && btAdapter.isEnabled())
                                                             {
                                                                 btAdapter.disable();
-                                                            }*/
+                                                            }
                 }
 
             }
-        });
-    }
-
-    private void list_paired_Devices() {
-        Set<BluetoothDevice> pairedDevices = btAdapter.getBondedDevices();
-        ArrayList<String> devices = new ArrayList<>();
-        for (BluetoothDevice bt : pairedDevices) {
-            devices.add(bt.getName() + "\n" + bt.getAddress());
-        }
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, devices);
-        bt_device_list.setAdapter(arrayAdapter);
-    }
-}
+        });*/

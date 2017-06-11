@@ -74,17 +74,33 @@
 
     <Button
         android:id="@+id/btn_connect"
-        android:layout_width="130dp"
+        android:layout_width="180dp"
         android:layout_height="50dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="90dp"
         android:background="@drawable/button_default"
         android:text="CONNECT"
         android:textColor="#ffffff"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_btn" />
+
+    <Button
+        android:id="@+id/btn_disconnect"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/button_default"
+        android:text="DISCONNECT"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_btn" />
 
 </android.support.constraint.ConstraintLayout>
