@@ -8,7 +8,7 @@ Used Techique:<br>
     Arduino. C Language<br>
     
 Use Arduino & Bluetooth Module (HC-05) to connect Android devices <br>
-Transfer Module KSM128 data
+Transfer Module HX711(KSM128) data
 
 On Android Device, will collect the data through Bluetooth (water that user has drinked)
 to calculate the amount of water that user needs to drink per day.
